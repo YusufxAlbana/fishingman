@@ -215,15 +215,9 @@ const GameCanvas = ({ onGameOver, onProgressUpdate, autoPlay = false, rod }) => 
             const catchRate = (80 / fd.hp) * power;
             p.progress += catchRate;
         } else {
-            // Escape Rate
-            // REDUCED for beginners.
-            // Agile 5-10. (5/100)*0.3 + 0.05 = 0.015 + 0.05 = 0.065.
-            // 100 / 0.065 = ~1500 frames (25s) to drain from full. Very forgiving.
-            // Previous was ~0.25 (4s to drain).
-            // Let's make it a bit tighter but still easy.
-            // (Agile/100)*0.5 + 0.1 -> Common(5): 0.025+0.1 = 0.125. (13s to drain).
-            const escapeRate = (fd.agile / 100) * 0.5 + 0.1;
-            p.progress -= escapeRate;
+            // Escape Rate logic removed as per user request (Progress bar only increases)
+            // const escapeRate = (fd.agile / 100) * 0.5 + 0.1;
+            // p.progress -= escapeRate;
         }
         if (p.progress < 0) p.progress = 0;
         if (p.progress > 100) p.progress = 100;
