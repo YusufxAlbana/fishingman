@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../supabaseClient';
 import { FISH_TYPES as FISH_DATA } from '../constants/assets';
 import { useNavigate } from 'react-router-dom';
 import SimulatedBackground from './SimulatedBackground';

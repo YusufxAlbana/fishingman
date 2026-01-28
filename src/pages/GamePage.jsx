@@ -38,10 +38,7 @@ const GamePage = ({ money, onCatch, equippedRod, totalCatches, onLevelUp, hooks,
         onCatch(fish);
 
         // Log to history
-        if (supabase) {
-            supabase.from('catches').insert([{ fish_name: fish.name, created_at: new Date() }])
-                .then(({ error }) => { if (error) console.error(error); });
-        }
+        // Supabase logic handled in App.jsx via onCatch
     };
 
     const handleRestart = () => {

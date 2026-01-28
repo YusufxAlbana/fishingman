@@ -128,6 +128,27 @@ function App() {
   const addToInventory = (fish) => {
     setInventory(prev => [...prev, fish]);
 
+    // Save to database for Collection
+    if (user && supabase) {
+      supabase.from('catches').insert({
+        user_id: user.id,
+        fish_name: fish.name,
+        fish_stars: fish.stars,
+        fish_price: fish.price
+      }).then(({ error }) => {
+        if (error) {
+          console.error('Error recording catch:', error);
+          showNotification(`Gagal simpan ke DB: ${error.message}`);
+        } else {
+          // Optional: confirm save
+          // showNotification(`Ikan tersimpan di koleksi cloud!`);
+        }
+      });
+    } else {
+      if (!user) showNotification('Mode Tamu: Koleksi tidak disimpan ke cloud.');
+      if (!supabase) showNotification('Offline: Koleksi tidak disimpan.');
+    }
+
     // XP Logic
     // Each fish gives XP equal to its stars * 10 (or simple 5 per fish)
     const xpGain = 10 * fish.stars;
