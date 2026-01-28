@@ -8,6 +8,7 @@ import GamePage from './pages/GamePage';
 import { ROD_TYPES } from './constants/gameConfig';
 import LandingPage from './components/LandingPage';
 import PixelNotification from './components/PixelNotification'; // Import
+import logo from './assets/logo.png'; // Import Logo
 
 import { supabase } from './supabaseClient';
 import LoginScreen from './components/LoginScreen';
@@ -292,6 +293,19 @@ function App() {
             onClose={() => setNotification({ ...notification, visible: false })}
           />
         )}
+
+        <img
+          src={logo}
+          alt="Fishingman Logo"
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '10px',
+            width: '80px',
+            zIndex: 1000,
+            pointerEvents: 'none' // Prevent blocking clicks if it overlaps
+          }}
+        />
 
         <Routes>
           <Route path="/" element={user ? <WelcomeScreen money={money} user={user} onLogout={logout} hooks={hooks} maxHooks={maxHooks} currentLevel={level} xp={xp} nextHookTime={timeToNextHook} invCount={inventory.length} /> : <LandingPage />} />
