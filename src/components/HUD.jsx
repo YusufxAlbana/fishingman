@@ -1,5 +1,7 @@
 import React from 'react';
 
+import pixelGirl from '../assets/Pixel_girl-removebg-preview.png';
+
 const PixelProgressBar = ({ progress }) => {
     // 20 segments, each 5%
     const segments = 20;
@@ -73,6 +75,53 @@ const PixelProgressBar = ({ progress }) => {
     );
 };
 
+const TutorialHint = () => {
+    return (
+        <div style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '20px',
+            zIndex: 90,
+            display: 'flex',
+            alignItems: 'flex-end',
+            gap: '10px',
+            pointerEvents: 'none' // Don't block clicks
+        }}>
+            <img
+                src={pixelGirl}
+                alt="Guide"
+                style={{
+                    width: '60px',
+                    filter: 'drop-shadow(2px 2px 0 rgba(0,0,0,0.5))'
+                }}
+            />
+            <div style={{
+                background: 'white',
+                padding: '8px 12px',
+                borderRadius: '15px 15px 15px 0',
+                fontFamily: '"Press Start 2P", monospace', // Try pixel font if available, fallback to monospace
+                fontSize: '0.7rem',
+                color: '#2c3e50',
+                boxShadow: '4px 4px 0 rgba(0,0,0,0.2)',
+                border: '2px solid #2c3e50',
+                marginBottom: '10px',
+                animation: 'float 2s infinite ease-in-out'
+            }}>
+                WASD untuk gerak
+            </div>
+
+            <style>
+                {`
+                @keyframes float {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-3px); }
+                }
+                `}
+            </style>
+        </div>
+    );
+};
+
 const HUD = ({ money, progress, showProgress }) => {
     return (
         <>
@@ -81,6 +130,8 @@ const HUD = ({ money, progress, showProgress }) => {
                     <span style={{ color: '#f1c40f', fontWeight: 'bold' }}>$</span> {money}
                 </div>
             </div>
+
+            <TutorialHint />
 
             {showProgress && <PixelProgressBar progress={progress} />}
         </>

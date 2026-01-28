@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import SimulatedBackground from './SimulatedBackground';
-import { UI_ICONS } from '../constants/assets';
+import { PixelPlayIcon, PixelShopIcon, PixelBagIcon, PixelCollectionIcon } from './PixelIcons';
 
 const WelcomeScreen = ({ money, user, onLogout, hooks, maxHooks, currentLevel, xp, nextHookTime, invCount }) => {
     const navigate = useNavigate();
@@ -111,8 +111,8 @@ const WelcomeScreen = ({ money, user, onLogout, hooks, maxHooks, currentLevel, x
                             <div className="bubble" style={{ left: '80%', width: '60px', height: '60px', animationDuration: '6s' }}></div>
                         </div>
 
-                        <div className="card-icon" style={{ width: '100px', height: '100px', marginBottom: '20px' }}>
-                            <svg viewBox="0 0 24 24" fill="white" style={{ width: '100%', height: '100%', filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.5))' }}><path d={UI_ICONS.play} /></svg>
+                        <div className="card-icon" style={{ width: '100px', height: '100px', marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <PixelPlayIcon scale={8} />
                         </div>
                         <div className="card-title" style={{ fontSize: '2.5rem' }}>BERLAYAR</div>
                         <div className="card-subtitle">Mulai memancing ikan legendaris</div>
@@ -123,8 +123,8 @@ const WelcomeScreen = ({ money, user, onLogout, hooks, maxHooks, currentLevel, x
 
                         {/* Shop Card */}
                         <div className="feature-card" onClick={() => navigate('/shop')}>
-                            <div className="card-icon">
-                                <svg viewBox="0 0 24 24" fill="#9b59b6" style={{ width: '100%', height: '100%' }}><path d={UI_ICONS.shop} /></svg>
+                            <div className="card-icon" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <PixelShopIcon scale={5} />
                             </div>
                             <div className="card-title">TOKO</div>
                             <div className="card-subtitle">Upgrade joran & beli kail</div>
@@ -132,8 +132,8 @@ const WelcomeScreen = ({ money, user, onLogout, hooks, maxHooks, currentLevel, x
 
                         {/* Backpack Card */}
                         <div className="feature-card" onClick={() => navigate('/backpack')}>
-                            <div className="card-icon">
-                                <svg viewBox="0 0 24 24" fill="#2ecc71" style={{ width: '100%', height: '100%' }}><path d={UI_ICONS.bag} /></svg>
+                            <div className="card-icon" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <PixelBagIcon scale={5} />
                             </div>
                             <div className="card-title">TAS SAYA</div>
                             <div className="card-subtitle">{invCount} Ikan ditangkap</div>
@@ -141,8 +141,8 @@ const WelcomeScreen = ({ money, user, onLogout, hooks, maxHooks, currentLevel, x
 
                         {/* Collection Card */}
                         <div className="feature-card" onClick={() => navigate('/collection')}>
-                            <div className="card-icon">
-                                <svg viewBox="0 0 24 24" fill="#f1c40f" style={{ width: '100%', height: '100%' }}><path d={UI_ICONS.collection} /></svg>
+                            <div className="card-icon" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <PixelCollectionIcon scale={5} />
                             </div>
                             <div className="card-title">KOLEKSI</div>
                             <div className="card-subtitle">Buku panduan ikan</div>

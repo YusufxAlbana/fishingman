@@ -80,6 +80,12 @@ const ShopScreen = ({ money, ownedRods, equippedRodId, onBuy, onEquip, onBuyHook
                     {`
                         .hide-scrollbar::-webkit-scrollbar { display: none; }
                         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+                        
+                        /* Custom Scrollbar for Shop Details */
+                        .custom-scrollbar::-webkit-scrollbar { width: 10px; }
+                        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 5px; }
+                        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 5px; border: 2px solid transparent; background-clip: content-box; }
+                        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.5); }
                     `}
                 </style>
 
@@ -166,9 +172,10 @@ const ShopScreen = ({ money, ownedRods, equippedRodId, onBuy, onEquip, onBuyHook
                     </div>
 
                     {/* RIGHT CARD: Details */}
-                    <div className="shop-details hide-scrollbar" style={{
+                    <div className="shop-details custom-scrollbar" style={{
                         background: 'rgba(20, 20, 30, 0.9)',
                         padding: '30px',
+                        paddingRight: '15px', // Adjust padding to accounts for scrollbar
                         borderRadius: '20px',
                         height: '100%', // Match height of left card
                         display: 'flex',
@@ -225,7 +232,7 @@ const ShopScreen = ({ money, ownedRods, equippedRodId, onBuy, onEquip, onBuyHook
                         )}
 
                         {/* Description */}
-                        <p style={{ lineHeight: '1.5', color: '#bdc3c7', fontSize: '1rem', marginBottom: '20px', flex: 1, overflowY: 'auto', whiteSpace: 'pre-wrap' }}>
+                        <p style={{ lineHeight: '1.5', color: '#bdc3c7', fontSize: '1rem', marginBottom: '20px', flex: 1, whiteSpace: 'pre-wrap' }}>
                             {selectedItem.description}
                         </p>
 

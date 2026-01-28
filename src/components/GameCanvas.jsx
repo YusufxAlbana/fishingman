@@ -304,13 +304,41 @@ const GameCanvas = ({ onGameOver, onProgressUpdate, autoPlay = false, rod }) => 
         ctx.restore();
 
         // Player
-        ctx.beginPath();
-        ctx.arc(p.player.x, p.player.y, p.player.radius, 0, Math.PI * 2);
+        // Player - Pixelated Circle
+        const playerPixelSize = 4;
+        const radius = p.player.radius;
+        const centerX = Math.floor(p.player.x / playerPixelSize) * playerPixelSize;
+        const centerY = Math.floor(p.player.y / playerPixelSize) * playerPixelSize;
+
+        // Draw Shadow/Fill
         ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-        ctx.fill();
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = p.player.catching ? '#38ef7d' : 'rgba(255, 255, 255, 0.8)';
-        ctx.stroke();
+        for (let y = -radius; y <= radius; y += playerPixelSize) {
+            for (let x = -radius; x <= radius; x += playerPixelSize) {
+                if (x * x + y * y <= radius * radius) {
+                    ctx.fillRect(centerX + x, centerY + y, playerPixelSize, playerPixelSize);
+                }
+            }
+        }
+
+        // Draw Border (Outline)
+        ctx.fillStyle = p.player.catching ? '#38ef7d' : 'rgba(255, 255, 255, 0.8)';
+        for (let y = -radius; y <= radius; y += playerPixelSize) {
+            for (let x = -radius; x <= radius; x += playerPixelSize) {
+                // Check if this pixel is inside but a neighbor is outside (border)
+                if (x * x + y * y <= radius * radius) {
+                    // Check neighbors
+                    let isBorder = false;
+                    if ((x + playerPixelSize) * (x + playerPixelSize) + y * y > radius * radius) isBorder = true;
+                    if ((x - playerPixelSize) * (x - playerPixelSize) + y * y > radius * radius) isBorder = true;
+                    if (x * x + (y + playerPixelSize) * (y + playerPixelSize) > radius * radius) isBorder = true;
+                    if (x * x + (y - playerPixelSize) * (y - playerPixelSize) > radius * radius) isBorder = true;
+
+                    if (isBorder) {
+                        ctx.fillRect(centerX + x, centerY + y, playerPixelSize, playerPixelSize);
+                    }
+                }
+            }
+        }
 
         requestRef.current = requestAnimationFrame(animate);
     };
