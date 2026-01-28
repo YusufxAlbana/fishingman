@@ -196,9 +196,16 @@ function App() {
   };
 
   const logout = async () => {
-    await supabase.auth.signOut();
+    try {
+      if (supabase) {
+        await supabase.auth.signOut();
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
     setUser(null);
-    window.location.href = '/';
+    showNotification('Berhasil keluar!');
+    // window.location.href = '/'; // Removed to prevent session restoration race condition
   };
 
   const currentRod = ROD_TYPES.find(r => r.id === equippedRodId) || ROD_TYPES[0];

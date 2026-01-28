@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import SimulatedBackground from './SimulatedBackground';
+import pixelGirl from '../assets/Pixel_girl-removebg-preview.png';
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -47,22 +48,70 @@ const LandingPage = () => {
                 <div style={{
                     width: '100%',
                     maxWidth: '800px',
+                    height: '400px', // Fixed height for preview
                     borderRadius: '20px',
                     overflow: 'hidden',
                     boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
                     border: '1px solid rgba(255,255,255,0.2)',
                     marginBottom: '40px',
-                    transform: 'perspective(1000px) rotateX(2deg)', // 3D effect
-                    transition: 'transform 0.3s ease'
+                    transform: 'perspective(1000px) rotateX(2deg)',
+                    transition: 'transform 0.3s ease',
+                    position: 'relative',
+                    background: '#2980b9' // Fallback blue
                 }}
                     onMouseEnter={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) scale(1.02)'}
                     onMouseLeave={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateX(2deg)'}
                 >
-                    <img
-                        src="/gameplay_preview.png"
-                        alt="Gameplay Preview"
-                        style={{ width: '100%', display: 'block' }}
-                    />
+                    <SimulatedBackground />
+
+                    {/* Fake HUD */}
+                    <div style={{ position: 'absolute', top: 20, left: 20, display: 'flex', gap: '10px' }}>
+                        <div style={{ background: 'rgba(0,0,0,0.5)', padding: '5px 15px', borderRadius: '20px', color: '#f1c40f', fontWeight: 'bold' }}>
+                            $ 999
+                        </div>
+                    </div>
+
+                    {/* Fake Player Cursor */}
+                    <div style={{
+                        position: 'absolute',
+                        top: '50%', left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '100px', height: '100px',
+                        border: '4px solid rgba(255,255,255,0.8)',
+                        borderRadius: '50%',
+                        background: 'rgba(255,255,255,0.2)'
+                    }}></div>
+
+                    {/* Pixel Girl Prompt */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '20px',
+                        left: '20px',
+                        display: 'flex',
+                        alignItems: 'flex-end',
+                        gap: '10px'
+                    }}>
+                        <img
+                            src={pixelGirl}
+                            alt="Guide"
+                            style={{
+                                width: '60px',
+                                filter: 'drop-shadow(2px 2px 0 rgba(0,0,0,0.5))'
+                            }}
+                        />
+                        <div style={{
+                            background: 'white',
+                            padding: '8px 12px',
+                            borderRadius: '15px 15px 15px 0',
+                            fontFamily: 'monospace',
+                            fontSize: '0.8rem',
+                            color: '#2c3e50',
+                            boxShadow: '4px 4px 0 rgba(0,0,0,0.2)',
+                            fontWeight: 'bold'
+                        }}>
+                            Ayo Mancing!
+                        </div>
+                    </div>
                 </div>
 
                 {/* Auth Actions */}
